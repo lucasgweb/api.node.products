@@ -5,11 +5,10 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
-import express, { NextFunction, Request, Response } from 'express';
-import productRoutes from './routes/product.routes';
+import express from 'express';
 import { ormCreateConnection } from '@infra/database';
-import { AppError } from '@application/Error/AppError';
 import { handleError } from './middleware/error';
+import { router } from './routes/index.router';
 
 const app = express();
 
@@ -19,7 +18,7 @@ app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/products', productRoutes);
+app.use(router);
 
 app.use(handleError);
 

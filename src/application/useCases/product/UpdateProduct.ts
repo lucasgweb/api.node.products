@@ -1,23 +1,19 @@
+import { IUpdateProductDTO } from '@application/dto/ProductDTO';
+import { AppError } from '@application/error/AppError';
+import { Product } from '@domain/entities';
+import { IProductRepository } from '@domain/repositories/IProductRepository';
 import { inject, injectable } from 'tsyringe';
 
-import { Product } from '@modules/product/domain/Product';
-import { IUpdateProductDTO } from '@modules/product/dto/ProductDTO';
-import { IProductRepository } from '@modules/product/repositories/IProductRepository';
-import { AppError } from '@shared/error/AppError';
-import { formatDate } from '@shared/infra/utils';
-
 @injectable()
-export class UpdateProductUseCase {
+export class UpdateProduct {
   constructor(
     @inject('productRepository')
     private repository: IProductRepository,
-    @inject('product')
-    private product: Product,
   ) {}
 
-  async updateById(data: IUpdateProductDTO): Promise<Product> {
+  async update(id: string,data: IUpdateProductDTO): Promise<Product> {
     const {
-      id,
+
       name,
       full_description,
       short_description,
@@ -25,64 +21,41 @@ export class UpdateProductUseCase {
       is_public,
       processprice,
     } = data;
-    this.product.id = id;
-    await this.checkIfExists();
 
-    Object.assign(this.product, {
-      id,
-      updated_at: formatDate(new Date().toISOString()),
-    });
-    if (processprice) {
-      Object.assign(this.product, {
-        processprice,
-      });
-    }
-    if (name) {
-      Object.assign(this.product, {
-        name,
-      });
-    }
-    if (full_description) {
-      Object.assign(this.product, {
-        full_description,
-      });
-    }
-    if (short_description) {
-      Object.assign(this.product, {
-        short_description,
-      });
-    }
+    const product = await this.repository.findById(id);
+
+     if (!product) {
+      throw new AppError(`No product found for id: ${id}`, 400)
+     }
+
+    product.setName(name ?? product.getName());
+    product.setFullDescription(full_description ?? product.getFullDescription());
+    product.setShortDescription(short_description ?? product.getShortDescription());
+    product.setProcessPrice(processprice ?? product.getProcessPrice());
+
     if (active) {
-      Object.assign(this.product, {
-        active,
-      });
+       if (active === 'inactive') {
+      product.setStatusInactive();
+    } else if (active === 'active') {
+      product.setStatusActive();
+    } else {
+      throw new AppError(`Status ${active} does not exist, try 'active' or 'inactive'`, 400);
     }
+    }
+
     if (is_public) {
-      Object.assign(this.product, {
-        is_public,
-      });
+       if (is_public === 'private') {
+      product.setPrivate();
+    } else if (is_public === 'public') {
+      product.setPublic();
+    } else {
+      throw new AppError(`Visibility ${active} does not exist, try 'public' or 'private'`, 400);
     }
-    await this.updateProductById();
-    return this.product;
-  }
-
-  private async checkIfExists(): Promise<void> {
-    if (!(await this.repository.findById(this.product))) {
-      throw new AppError(`No product was found to id ${this.product.id}`, 400);
     }
-  }
 
-  private async updateProductById(): Promise<void> {
-    await this.repository.updateById(this.product);
-  }
+    await this.repository.save(product);
 
-  async inactive(id: string): Promise<void> {
-    Object.assign(this.product, { id });
-    await this.checkIfExists();
-    await this.inactiveById();
-  }
+    return product;
 
-  private async inactiveById(): Promise<void> {
-    await this.repository.inactiveById(this.product.id);
   }
 }

@@ -3,10 +3,9 @@ import { ProductsController } from '../controllers/ProductsController';
 
 const productsController = new ProductsController();
 
-const productRoutes = Router();
+export const productRoutes = Router();
 
-productRoutes.get('/listall', productsController.listAll);
-productRoutes.post('/create', productsController.create);
-
-
-export default productRoutes;
+productRoutes.get('/', productsController.listAll);
+productRoutes.post('/', productsController.create);
+productRoutes.get('/:id', productsController.findById);
+productRoutes.put('/:id', productsController.update);

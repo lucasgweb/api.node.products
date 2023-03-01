@@ -26,7 +26,6 @@ export interface IResponseListAllProducts {
 }
 
 export interface IUpdateProductDTO {
-  id: string;
   name?: string;
   full_description?: string;
   short_description?: string;

@@ -1,6 +1,7 @@
 import { ICreateProductDTO } from "@application/dto/ProductDTO";
+
 import { ProductValidator } from "@application/validators/ProductValidator";
-import { Product, Visibility, Status } from "@domain/entities/Product";
+import { Product } from "@domain/entities/Product";
 import { IProductRepository } from "@domain/repositories/IProductRepository";
 import { inject, injectable } from "tsyringe";
 

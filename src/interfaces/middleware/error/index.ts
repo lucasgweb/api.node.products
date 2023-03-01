@@ -1,4 +1,4 @@
-import { AppError } from '@application/Error/AppError';
+import { AppError } from '@application/error/AppError';
 import { Request, Response, NextFunction } from 'express';
 
 
@@ -10,6 +10,7 @@ export const handleError = (
 ) => {
   if (err instanceof AppError) {
     return response.status(err.statusCode).json({
+      status: 'error',
       message: err.message,
     });
   }

@@ -1,6 +1,6 @@
 import { Status } from '@domain/entities';
 import { ICreateProductDTO } from '../dto/ProductDTO';
-import { AppError } from '../Error/AppError';
+import { AppError } from '../error/AppError';
 
 export class ProductValidator {
   public static validateCreateProduct(data: ICreateProductDTO) {

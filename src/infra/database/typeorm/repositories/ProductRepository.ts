@@ -17,10 +17,17 @@ export class ProductRepository implements IProductRepository {
 
     await this.repository.save(entity);
   }
-  findById(product: Product): Promise<boolean> {
-    throw new Error('Method not implemented.');
+
+  async findById(id: string): Promise<Product | undefined> {
+    const product = await this.repository.findOne(id);
+
+    if (product) {
+       return ProductMapper.toDomain(product);
+    }
+      return product;
+
   }
-  updateById(product: Product): Promise<void> {
+  update(id: string, product: Product): Promise<void> {
     throw new Error('Method not implemented.');
   }
   inactiveById(id: string): Promise<void> {

@@ -7,7 +7,10 @@
     "dev": "ts-node-dev --inspect --transpile-only -r tsconfig-paths/register src/interfaces/server.ts --ignore-watch node_modules",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
-    "typeorm": "typeorm-ts-node-esm"
+    "typeorm:dev": "ts-node-dev node_modules/typeorm/cli.js",
+    "typeorm": "node_modules/typeorm/cli.js",
+    "typeorm:win": "ts-node -r tsconfig-paths/register node_modules\\typeorm\\cli.js",
+    "migration:generate:win": "npm run typeorm:win migration:generate -- -n"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",

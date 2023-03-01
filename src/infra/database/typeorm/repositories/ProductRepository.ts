@@ -15,7 +15,7 @@ export class ProductRepository implements IProductRepository {
   async save(product: Product): Promise<void> {
    const entity = ProductMapper.toEntity(product);
 
-    this.repository.save(entity);
+    await this.repository.save(entity);
   }
   findById(product: Product): Promise<boolean> {
     throw new Error('Method not implemented.');

@@ -1,4 +1,4 @@
-import { Product } from '@domain/entities/index';
+import { Product } from '@modules/product';
 import { ProductEntity } from '@infra/database/typeorm';
 
 export class ProductMapper {

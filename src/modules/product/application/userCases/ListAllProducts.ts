@@ -1,8 +1,8 @@
 import {
   IListProducts,
   IResponseListAllProducts,
-} from '@application/dto/ProductDTO';
-import { IProductRepository } from '@domain/repositories/IProductRepository';
+} from '../dto/ProductDTO';
+import { IProductRepository } from '../../domain/repositories/IProductRepository';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()

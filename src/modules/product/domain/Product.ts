@@ -1,7 +1,6 @@
-import { Accessory } from './Accessory';
-import { Entity } from './Entity';
+import { Entity, Status } from '@shared/entity/Entity';
 
-export { Status } from "./Entity";
+export { Status } from "@shared/entity/Entity";
 
 export enum Visibility {
   Public = 'public',
@@ -9,8 +8,7 @@ export enum Visibility {
 }
 
 export class Product extends Entity {
-
-  private accessories: Accessory[] = [];
+  /* private accessories: Accessory[] = []; */
 
   constructor(
     id: string,
@@ -23,7 +21,7 @@ export class Product extends Entity {
     created_at: string,
     updated_at?: string,
   ) {
-    super(id, active, created_at, updated_at,);
+    super(id, active, created_at, updated_at);
 
     if (is_public == 'private') {
       this.setPrivate();
@@ -64,12 +62,12 @@ export class Product extends Entity {
     return this.full_description;
   }
 
-  public getAccessories(): Accessory[] {
-    return this.accessories;
-  }
-
   public getIsPublic(): string {
     return this.is_public;
+  }
+/*
+  public getAccessories(): Accessory[] {S
+    return this.accessories;
   }
 
   // Accessory methods
@@ -82,7 +80,7 @@ export class Product extends Entity {
     if (index > -1) {
       this.accessories.splice(index, 1);
     }
-  }
+  } */
 
   // Visibility methods
 

@@ -1,7 +1,4 @@
-import { ListAllProducts } from '@application/useCases';
-import { CreateProduct } from '@application/useCases';
-import { FindProductById } from '@application/useCases/product/FindProductById';
-import { UpdateProduct } from '@application/useCases/product/UpdateProduct';
+import { ListAllProducts, CreateProduct, FindProductById, UpdateProduct } from '@modules/product/';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { v4 } from 'uuid'

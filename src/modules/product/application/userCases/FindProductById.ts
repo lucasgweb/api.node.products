@@ -1,10 +1,10 @@
 import {
   IListProducts,
   IResponseListAllProducts,
-} from '@application/dto/ProductDTO';
-import { AppError } from '@application/error/AppError';
-import { Product } from '@domain/entities';
-import { IProductRepository } from '@domain/repositories/IProductRepository';
+} from '../dto/ProductDTO';
+import { AppError } from '@shared/error/AppError';
+import { Product } from '../../domain/Product';
+import { IProductRepository } from '../../domain/repositories/IProductRepository';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()

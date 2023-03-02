@@ -1,9 +1,9 @@
 import { container } from 'tsyringe';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Product } from '@domain/entities';
+import { Product } from '@modules/product';
 
-import { IProductRepository } from '@domain/repositories/IProductRepository';
+import { IProductRepository } from '@modules/product';
 import { ProductRepository } from '@infra/database/typeorm/repositories/ProductRepository';
 
 container.register<string>('uuid', {

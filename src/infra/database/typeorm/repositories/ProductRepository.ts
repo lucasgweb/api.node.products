@@ -1,5 +1,5 @@
-import { Product } from '@domain/entities/index';
-import { IProductRepository } from '@domain/repositories/IProductRepository';
+import { Product } from '@modules/product';
+import { IProductRepository } from '@modules/product';
 
 import { ProductMapper } from '@infra/mappers/ProductMapper';
 import { getRepository, Repository } from 'typeorm';

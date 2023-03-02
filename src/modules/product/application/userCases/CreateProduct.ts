@@ -1,8 +1,8 @@
-import { ICreateProductDTO } from "@application/dto/ProductDTO";
+import { ICreateProductDTO } from "../dto/ProductDTO";
 
-import { ProductValidator } from "@application/validators/ProductValidator";
-import { Product } from "@domain/entities/Product";
-import { IProductRepository } from "@domain/repositories/IProductRepository";
+import { ProductValidator } from "../validators/ProductValidator";
+import { Product } from "../../domain/Product";
+import { IProductRepository } from "../../domain/repositories//IProductRepository";
 import { inject, injectable } from "tsyringe";
 
 @injectable()

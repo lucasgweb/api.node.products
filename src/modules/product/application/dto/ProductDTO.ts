@@ -1,4 +1,4 @@
-import { Product } from '@domain/entities';
+import { Product } from "../../domain/Product";
 
 export interface ICreateProductDTO {
   uuid: string
